@@ -2,7 +2,9 @@ import { Body, Controller, Post, Request, UseGuards, UsePipes, ValidationPipe } 
 import { PaymentService } from './payment.service';
 import { PaymentMethodDto } from './dto/payment.method.dto';
 import { JwtUserAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Payment')
 @Controller('payment')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}

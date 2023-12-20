@@ -14,21 +14,26 @@ import { PaymentModule } from './payment/payment.module';
 import { UserManagementModule } from './user-management/user-management.module';
 import { FaqModule } from './operations/faq.module';
 import { UserquestionModule } from './operations/userquestion.module';
-
+import { RequestModule } from './request/request.module';
+import { WishlistModule } from './wishlist/wishlist.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(config), 
-    UserModule, 
-    AuthModule, 
+    UserModule,  
     ProfileModule, 
     TemplateModule, 
     SearchModule, 
     SubscriptionModule, 
     PaymentModule,
+    AuthModule,
     UserManagementModule,
     FaqModule,
-    UserquestionModule,
+    UserquestionModule, 
+    RequestModule, 
+    WishlistModule,
+    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService],

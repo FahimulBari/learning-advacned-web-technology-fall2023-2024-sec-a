@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Put, Param, Delete, UsePipes,ValidationPip
 import { FaqService } from './faq.service';
 import { CreateFaqDto } from './dto/create-faq.dto';
 import { UpdateFaqDto } from './dto/update-faq.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('FAQ')
 @Controller('faq')
 export class FaqController {
   constructor(private readonly faqService: FaqService) {}

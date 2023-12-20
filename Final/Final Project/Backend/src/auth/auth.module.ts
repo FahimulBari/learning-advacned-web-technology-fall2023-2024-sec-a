@@ -6,6 +6,10 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtAdminStrategy, JwtUserStrategy } from './jwt.strategy';
+import { Download } from 'src/entities/download.entity';
+import { Template } from 'src/entities/template.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DownloadService } from 'src/operations/download.service';
 
 @Module({
   imports: [
@@ -14,10 +18,11 @@ import { JwtAdminStrategy, JwtUserStrategy } from './jwt.strategy';
     JwtModule.register({
       secret: 'FAHIM', // JWT Token Setup
       signOptions: { expiresIn: '30m' },
-    })
+    }),
+    TypeOrmModule.forFeature([Template, Download]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy,JwtUserStrategy, JwtAdminStrategy],
+  providers: [AuthService, LocalStrategy,JwtUserStrategy, JwtAdminStrategy, DownloadService],
   exports: [AuthService]
 })
 export class AuthModule {}

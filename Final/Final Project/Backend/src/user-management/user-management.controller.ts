@@ -4,8 +4,9 @@ import { UserManagementService } from './user-management.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAdminAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('User-management')
 @Controller('user-management')
 @UseGuards(JwtAdminAuthGuard)
 

@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Put, Param, Delete, UsePipes,ValidationPip
 import { UserquestionService } from './userquestion.service';
 import { CreateUserQuestionDto } from './dto/create-user-question.dto';
 import { UpdateUserQuestionDto } from './dto/update-user-question.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User Question')
 @Controller('userquestion')
 export class UserquestionController {
   constructor(private readonly userquestionService: UserquestionService) {}

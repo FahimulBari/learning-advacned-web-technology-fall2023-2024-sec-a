@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, V
 import { TemplateService } from './template.service';
 import { CreateTemplateDto } from './dto/create.template.dto';
 import { JwtAdminAuthGuard, JwtUserAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Template')
 @Controller('template')
 export class TemplateController {
   constructor(private readonly templateService: TemplateService) {}

@@ -2,7 +2,9 @@ import { Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe
 import { UserService } from './user.service';
 import { CreateAdminDto } from './dto/create.admin.dto';
 import { JwtAdminAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
