@@ -1,5 +1,5 @@
 import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from "passport-jwt";
+import { Strategy } from "passport-jwt";
 import { AuthService } from "./auth.service";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 
@@ -7,8 +7,8 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 export class JwtUserStrategy extends PassportStrategy(Strategy, 'jwt-user'){
     constructor(private authService: AuthService){
         super({
-            jwtFromRequest: (req) => {         
-                return req.session['token'];
+            jwtFromRequest: (req) => {        
+                return req.headers['authorization'];
               },
             ignoreExpiration: false,
             secretOrKey: 'FAHIM'
@@ -27,7 +27,7 @@ export class JwtAdminStrategy extends PassportStrategy(Strategy, 'jwt-admin'){
     constructor(private authService: AuthService){
         super({
             jwtFromRequest: (req) => {         
-                return req.session['token'];
+                return req.headers['authorization'];
               },
             ignoreExpiration: false,
             secretOrKey: 'FAHIM'

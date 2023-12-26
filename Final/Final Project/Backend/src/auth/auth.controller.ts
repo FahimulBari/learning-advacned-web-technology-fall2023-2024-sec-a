@@ -21,10 +21,10 @@ export class AuthController {
 
     const JwtObj = await this.authService.getJwtToken(req.user);
 
-    session.token = JwtObj.access_token;
-    session.save();
+    // session.token = JwtObj.access_token;
+    // session.save();
 
-    return session.token;
+    return {token: JwtObj.access_token};
   }
 
   @Post('signup')
@@ -38,19 +38,5 @@ export class AuthController {
     await session.destroy();
     console.log(session);
     return 'You are logged out!';
-  }
-
-  @ApiTags('Download')
-  @Post('download/:templateId')
-  async downloadTemplate(@Session() session, @Param('templateId') templateId: string) {
-    const userId = session.userId;
-    return this.downloadService.downloadTemplate(userId, templateId);
-  }
-
-  @ApiTags('Download')
-  @Get('download/history')
-  async getDownloadHistory(@Session() session) {
-    const userId = session.userId;
-    return this.downloadService.getDownloadHistory(userId);
   }
 }
