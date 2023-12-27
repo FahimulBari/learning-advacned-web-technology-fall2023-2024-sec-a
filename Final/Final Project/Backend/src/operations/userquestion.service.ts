@@ -14,7 +14,7 @@ export class UserquestionService {
   constructor(@InjectRepository(UserQuestion) private readonly userquestionRepo: Repository<UserQuestion>,
               ){}
 
-   async create(createUserQuestionDto: CreateUserQuestionDto, userId: string): Promise<UserQuestion> {
+   async create(createUserQuestionDto: CreateUserQuestionDto, userId: number): Promise<UserQuestion> {
     const existingQuestion = await this.userquestionRepo.findOne({
         where: [{ question: createUserQuestionDto.question } ],});
       if (existingQuestion) {
@@ -29,21 +29,21 @@ export class UserquestionService {
     return await this.userquestionRepo.save(uq);
   }
 
-  async findAllByUser(userId: string): Promise<UserQuestion[]> {
+  async findAllByUser(userId: number): Promise<UserQuestion[]> {
     return await this.userquestionRepo.find({
         where: { user: { id: userId } },
     });
 }
 
-async findOneByUser(id: number, userId: string): Promise<UserQuestion> {
+async findOneByUser(id: number, userId: number): Promise<UserQuestion> {
     return await this.userquestionRepo.findOne({ where: { id, user: { id: userId } } });
 }
 
-async countTotalQuestionsByUser(userId: string): Promise<number> {
+async countTotalQuestionsByUser(userId: number): Promise<number> {
     return await this.userquestionRepo.count({ where: { user: { id: userId } } });
 }
 
-async update(id: number, updateUserQuestionDto: UpdateUserQuestionDto, userId: string): Promise<string> {
+async update(id: number, updateUserQuestionDto: UpdateUserQuestionDto, userId: number): Promise<string> {
   const userQuestion = await this.userquestionRepo.findOne({
       where: { id, user: { id: userId } },
   });

@@ -11,12 +11,12 @@ export class DownloadService {
     private readonly downloadRepo: Repository<Download>,
   ) {}
 
-  async downloadTemplate(userId: string, templateId: string): Promise<Download> {
+  async downloadTemplate(userId: number, templateId: number): Promise<Download> {
     const download = this.downloadRepo.create({ user: { id: userId }, template: { id: templateId } });
     return await this.downloadRepo.save(download);
   }
 
-  async getDownloadHistory(userId: string): Promise<Download[]> {
+  async getDownloadHistory(userId: number): Promise<Download[]> {
     return await this.downloadRepo.find({ where: { user: { id: userId } }, relations: ['template'], });
   }
 
