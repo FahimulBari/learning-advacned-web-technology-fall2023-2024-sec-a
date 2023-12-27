@@ -9,7 +9,7 @@ import { JwtAdminStrategy, JwtUserStrategy } from './jwt.strategy';
 import { Download } from 'src/entities/download.entity';
 import { Template } from 'src/entities/template.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DownloadService } from 'src/operations/download.service';
+import { DownloadhistoryService } from 'src/downloadhistory/downloadhistory.service';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { DownloadService } from 'src/operations/download.service';
     TypeOrmModule.forFeature([Template, Download]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy,JwtUserStrategy, JwtAdminStrategy, DownloadService],
+  providers: [AuthService, LocalStrategy,JwtUserStrategy, JwtAdminStrategy, DownloadhistoryService],
   exports: [AuthService]
 })
 export class AuthModule {}

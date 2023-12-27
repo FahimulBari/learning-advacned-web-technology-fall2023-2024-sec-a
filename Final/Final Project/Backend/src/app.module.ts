@@ -12,11 +12,12 @@ import { SearchModule } from './search/search.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { PaymentModule } from './payment/payment.module';
 import { UserManagementModule } from './user-management/user-management.module';
-import { FaqModule } from './operations/faq.module';
-import { UserquestionModule } from './operations/userquestion.module';
+
 import { RequestModule } from './request/request.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { CommentModule } from './comment/comment.module';
+import { FaqModule } from './faq/faq.module';
+import { UserquestionModule } from './user-question/userquestion.module';
 
 @Module({
   imports: [

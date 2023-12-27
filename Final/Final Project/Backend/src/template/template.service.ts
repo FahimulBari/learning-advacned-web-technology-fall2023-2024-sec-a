@@ -15,7 +15,7 @@ export class TemplateService {
         return 'Template Has Been Created';
     }
 
-    async update(id: string, createTemplateDto: CreateTemplateDto){
+    async update(id: number, createTemplateDto: CreateTemplateDto){
         const template = await this.templateRepo.findOne({where: {id:id}});
         if (!template) {
             throw new NotFoundException('Template not found');
@@ -24,7 +24,7 @@ export class TemplateService {
         return 'Template Has Been Updated';
     }
 
-    async delete(id: string) {
+    async delete(id: number) {
         const template = await this.templateRepo.findOne({ where: { id } });
         if (!template) {
           throw new NotFoundException('Template not found');
@@ -33,7 +33,7 @@ export class TemplateService {
         return 'Template has been deleted';
       }
     
-      async get(id: string) {
+      async get(id: number) {
         const template = await this.templateRepo.findOne({ where: { id } });
         if (!template) {
           throw new NotFoundException('Template not found');

@@ -15,17 +15,17 @@ export class RequestService {
         return this.requestRepo.find();
       }
 
-    async findOne(id: string){
+    async findOne(id: number){
         return await this.requestRepo.findOne({where: {id:id}});
     }
 
-    async create(createRequestDto: CreateRequestDto, userId: string){
+    async create(createRequestDto: CreateRequestDto, userId: number){
     
         const us = await this.requestRepo.create({...createRequestDto, user: { id: userId }});
         return this.requestRepo.save(us);
     }
 
-    async update(id: string, updateRequestDto: UpdateRequestDto, userId: string){
+    async update(id: number, updateRequestDto: UpdateRequestDto, userId: number){
         const req = await this.requestRepo.findOne({
             where: { id, user: { id: userId } },
         });
@@ -43,7 +43,7 @@ export class RequestService {
         return await this.requestRepo.delete(id)
     }
 
-    async findAllByUser(userId: string) {
+    async findAllByUser(userId: number) {
         return await this.requestRepo.find({
             where: { user: { id: userId } },
         });

@@ -14,7 +14,7 @@ export class PaymentService {
     ){}
 
 
-    async AddMethod(paymentMethodDto: PaymentMethodDto,userId: string){
+    async AddMethod(paymentMethodDto: PaymentMethodDto,userId: number){
         const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
         if(user.payment_method == null){
             const method = await this.paymentRepo.create(paymentMethodDto);
@@ -29,7 +29,7 @@ export class PaymentService {
         return 'Cannot Add Method!! Payment Method Already Added';
     }
 
-    async UpdateMethod(paymentMethodDto: PaymentMethodDto,userId: string){
+    async UpdateMethod(paymentMethodDto: PaymentMethodDto,userId: number){
         const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
         await this.paymentRepo.update(user.payment_method.id ,paymentMethodDto); 
         return "Payment Method Updated";

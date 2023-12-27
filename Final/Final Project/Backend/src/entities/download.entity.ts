@@ -5,7 +5,7 @@ import { Template } from './template.entity';
 @Entity('downloads')
 export class Download {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @ManyToOne(() => User, user => user.downloads)
   @JoinColumn({ name: 'user_id' })

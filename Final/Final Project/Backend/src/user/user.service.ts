@@ -16,6 +16,7 @@ export class UserService {
   async create(createUserDTO: CreateUserDto | CreateAdminDto){
   const user = this.userRepo.create(createUserDTO);  
 
+  //Role
   if(user.role == null) user.role = 'user'; 
 
   //Subscription
@@ -41,14 +42,16 @@ export class UserService {
   }
 
   await this.userRepo.save(user);
-  return 'User Has Been Created';
+  return {
+    message: 'User Has Been Created'
+  }
   }
 
   async findAll() {
       return await this.userRepo.find(); 
   }
 
-  async findOne(id:string){
+  async findOne(id:number){
     return await this.userRepo.findOne({where: {id:id}})
   }
 

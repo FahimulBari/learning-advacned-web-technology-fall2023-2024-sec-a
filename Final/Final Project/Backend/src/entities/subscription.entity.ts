@@ -4,7 +4,7 @@ import { User } from "./user.entity";
 @Entity('subscriptions')
 export class Subscription {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({ nullable: false })
     type: string;

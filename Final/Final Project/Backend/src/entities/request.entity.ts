@@ -5,7 +5,7 @@ import { User } from "./user.entity";
 export class Request{
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({unique: true, nullable:false})
     tmpname: string;

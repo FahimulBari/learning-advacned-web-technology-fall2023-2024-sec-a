@@ -21,7 +21,7 @@ export class SearchService {
 
     async GetUsersByNameSegment(segment: string){
         return await this.userRepo.find({
-          where: { name: Like(`%${segment}%`) },
+          where: { username: Like(`%${segment}%`) },
         });
     }
 

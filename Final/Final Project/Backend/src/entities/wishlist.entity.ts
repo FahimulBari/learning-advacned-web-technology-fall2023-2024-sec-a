@@ -6,7 +6,7 @@ import { Template } from "./template.entity";
 export class Wishlist{
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @ManyToOne(type=>Template, template=>template.wishlist)
     template: Template;

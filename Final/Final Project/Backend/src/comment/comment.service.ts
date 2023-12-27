@@ -13,17 +13,17 @@ export class CommentService {
     async findAll(): Promise<Comment[]> {
         return this.commentRepo.find();
       }
-    async findOne(id: string){
+    async findOne(id: number){
         return await this.commentRepo.findOne({where: {id:id}});
     }
 
-    async create(createCommentDto: CreateCommentDto, userId: string){
+    async create(createCommentDto: CreateCommentDto, userId: number){
         
         const user = await this.commentRepo.create({...createCommentDto, user: { id: userId }});
         return await this.commentRepo.save(user);
     }
 
-    async update(id: string, updateCommentDto: UpdateCommentDto, userId: string){
+    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number){
         const com = await this.commentRepo.findOne({
             where: { id, user: { id: userId } },
         });
@@ -36,12 +36,12 @@ export class CommentService {
         return `The comment with id #${id} has been updated`;
       }
 
-    async delete(id: string){
+    async delete(id: number){
         return await this.commentRepo.delete(id)
     }
 
 
-    async findAllByUser(userId: string) {
+    async findAllByUser(userId: number) {
         return await this.commentRepo.find({
             where: { user: { id: userId } },
         });

@@ -19,13 +19,13 @@ export class SubscriptionController {
   @UseGuards(JwtAdminAuthGuard)
   @Put('update/:id')
   @UsePipes(ValidationPipe)
-  Update(@Param('id') id:string,@Body() subscriptionDTO: SubscriptionDto){
+  Update(@Param('id') id:number,@Body() subscriptionDTO: SubscriptionDto){
     return this.subscriptionService.update(id,subscriptionDTO);
   }
 
   @UseGuards(JwtUserAuthGuard)
   @Get('get/:id')
-  GetOne(@Param('id') id:string)
+  GetOne(@Param('id') id:number)
   {
     return this.subscriptionService.Get(id);
   }
@@ -37,22 +37,22 @@ export class SubscriptionController {
     return this.subscriptionService.GetAll();
   }
 
-  @UseGuards(JwtAdminAuthGuard)
+  @UseGuards(JwtUserAuthGuard)
   @Delete('delete/:id')
-  Delete(@Param('id') id:string)
+  Delete(@Param('id') id:number)
   {
     return this.subscriptionService.delete(id);
   }
 
   @UseGuards(JwtAdminAuthGuard)
   @Get('user/:id')
-  GetUsers(@Param('id') id:string){
+  GetUsers(@Param('id') id:number){
     return this.subscriptionService.FindUsers(id);
   }
 
   @UseGuards(JwtUserAuthGuard)
   @Get('subscribe/:id')
-  welcomeUser(@Param('id') id:string,@Request() req){
+  welcomeUser(@Param('id') id:number,@Request() req){
     return this.subscriptionService.subscribe(id,req.user.id);
   }
 

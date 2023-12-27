@@ -12,18 +12,32 @@ import { Comment } from "./comment.entity";
 export class User{
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({unique: false, nullable: false})
-    name: string;
+    username: string;
 
     @Column({unique: true, nullable: false})
     email: string;
 
-    @Column({nullable: false})
-    password: string;
+    @Column({nullable: true})
+    phonenumber: string;
 
     @Column({nullable: true})
+    dob: Date;
+
+    @Column({nullable:false})
+    gender: string;
+
+
+    @Column({nullable: false})
+    password: string;
+    
+    @Column({nullable:true})
+    confirmpassword: string;
+
+
+    @Column({nullable: false})
     role: string;
 
     @Column({nullable: true})
@@ -47,17 +61,18 @@ export class User{
     questions: UserQuestion[];
 
     //Shafin
-    @OneToMany(type=>Comment, comment=>comment.user)
+    @OneToMany(()=>Comment, comment=>comment.user)
     comment: Comment[];
 
-    @OneToMany(type=>Request, request=>request.user)
+    @OneToMany(()=>Request, request=>request.user)
     request: Request[];
 
-    @OneToMany(type=>Wishlist, wishlist=>wishlist.user)
+    @OneToMany(()=>Wishlist, wishlist=>wishlist.user)
     wishlist: Request[];
 
     @BeforeInsert()
     async hashPasswod(){
         this.password = await bcrypt.hash(this.password,10);
+        this.confirmpassword = await bcrypt.hash(this.password,10);
     }
 }

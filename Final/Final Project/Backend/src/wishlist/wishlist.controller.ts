@@ -8,7 +8,7 @@ export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
 
   @Post('add/:templateId')
-  async AddTemplate(@Session() session, @Param('templateId') templateId: string) {
+  async AddTemplate(@Session() session, @Param('templateId') templateId: number) {
     const userId = session.userId;
     return this.wishlistService.createWishlist(userId, templateId);
   }

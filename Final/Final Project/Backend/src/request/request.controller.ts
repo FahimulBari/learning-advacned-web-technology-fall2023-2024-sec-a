@@ -17,7 +17,7 @@ export class RequestController {
     }
 
     @Get(':id')
-    userId(@Param('id') id:string){
+    userId(@Param('id') id:number){
         return this.requestService.findOne(id);
     }
 
@@ -29,7 +29,7 @@ export class RequestController {
 
 
     @Put('update/:id')
-    update(@Param('id') id: string, @Body() updateRequestDto: UpdateRequestDto,@Session() session){
+    update(@Param('id') id: number, @Body() updateRequestDto: UpdateRequestDto,@Session() session){
         const userid = session.userId;
         return this.requestService.update(id, updateRequestDto, userid);
     }

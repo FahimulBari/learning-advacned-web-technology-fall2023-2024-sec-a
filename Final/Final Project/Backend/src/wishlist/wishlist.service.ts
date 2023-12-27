@@ -11,12 +11,12 @@ export class WishlistService {
   constructor(@InjectRepository(Wishlist) private readonly wishlistrepo: Repository<Wishlist>){
   }
 
-  async createWishlist(userId: string, templateId: string): Promise<Wishlist> {
+  async createWishlist(userId: number, templateId: number): Promise<Wishlist> {
     const list = this.wishlistrepo.create({ user: { id: userId }, template: { id: templateId } });
     return await this.wishlistrepo.save(list);
   }
 
-  async getWishlist(userId: string): Promise<Wishlist[]> {
+  async getWishlist(userId: number): Promise<Wishlist[]> {
     return await this.wishlistrepo.find({ where: { user: { id: userId } },
                                          relations: ['template'], });
   }

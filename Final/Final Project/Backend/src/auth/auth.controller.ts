@@ -4,15 +4,13 @@ import { LocalAuthGuard } from './local-auth.guard';
 import { UserService } from 'src/user/user.service';
 import { CreateUserDto } from 'src/user/dto/create.user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { DownloadService } from 'src/operations/download.service';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UserService,
-    private readonly downloadService: DownloadService) {}
+    private readonly userService: UserService) {}
 
   //Login: Local Login & Receive JWT Token
   @UseGuards(LocalAuthGuard)

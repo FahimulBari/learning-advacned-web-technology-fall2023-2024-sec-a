@@ -19,7 +19,7 @@ export class TemplateController {
   @UseGuards(JwtAdminAuthGuard)
   @Put('update/:id')
   @UsePipes(ValidationPipe)
-  UpdateTemplate(@Param('id') id:string,@Body() createTemplateDto: CreateTemplateDto){
+  UpdateTemplate(@Param('id') id:number,@Body() createTemplateDto: CreateTemplateDto){
     return this.templateService.update(id,createTemplateDto);
   }
 
@@ -32,14 +32,14 @@ export class TemplateController {
   
   @UseGuards(JwtUserAuthGuard)
   @Get('get/:id')
-  GetTemplate(@Param('id') id:string)
+  GetTemplate(@Param('id') id:number)
   {
     return this.templateService.get(id);
   }
 
   @UseGuards(JwtAdminAuthGuard)
   @Delete('delete/:id')
-  DeleteTemplate(@Param('id') id:string)
+  DeleteTemplate(@Param('id') id:number)
   {
     return this.templateService.delete(id);
   }

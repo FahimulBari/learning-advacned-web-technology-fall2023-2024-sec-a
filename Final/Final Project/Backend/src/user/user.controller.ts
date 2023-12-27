@@ -24,7 +24,7 @@ export class UserController {
 
   @UseGuards(JwtAdminAuthGuard)
   @Get('single/:id')
-  findOne(@Param('id') id:string){
+  findOne(@Param('id') id:number){
     return this.userService.findOne(id);
   }
 

@@ -16,7 +16,7 @@ export class CommentController {
     }
 
     @Get(':id')
-    userId(@Param('id') id:string){
+    userId(@Param('id') id:number){
         return this.commentService.findOne(id);
     }
 
@@ -28,13 +28,13 @@ export class CommentController {
 
 
     @Put('update/:id')
-    update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto,@Session() session){
+    update(@Param('id') id: number, @Body() updateCommentDto: UpdateCommentDto,@Session() session){
         const userid = session.userId;
         return this.commentService.update(id, updateCommentDto,userid);
     }
 
     @Delete('delete/:id')
-    delete(@Param('id') id:string){
+    delete(@Param('id') id:number){
         return this.commentService.delete(id);
     }
 

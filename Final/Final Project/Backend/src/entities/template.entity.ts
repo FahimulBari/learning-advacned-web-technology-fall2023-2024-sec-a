@@ -6,7 +6,7 @@ import { Wishlist } from "./wishlist.entity";
 export class Template{
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column({unique: false, nullable: false})
     name: string;

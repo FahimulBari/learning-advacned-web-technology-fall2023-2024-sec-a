@@ -18,7 +18,7 @@ export class SubscriptionService {
         await this.subscriptionRepo.save(subscription);
         return 'New Subscription Added';
       }
-      async update(id: string, subscriptionDto: SubscriptionDto){
+      async update(id: number, subscriptionDto: SubscriptionDto){
         const subscription = await this.subscriptionRepo.findOne({where: {id:id}});
         if (!subscription) {
             throw new NotFoundException('Subscription not found');
@@ -27,7 +27,7 @@ export class SubscriptionService {
         return 'Subscription Has Been Updated';
     }
 
-    async Get(id: string) {
+    async Get(id: number) {
         const subscription = await this.subscriptionRepo.findOne({ where: { id } });
         if (!subscription) {
           throw new NotFoundException('Subscription not found');
@@ -40,16 +40,18 @@ export class SubscriptionService {
       }
 
 
-    async delete(id: string) {
+    async delete(id: number) {
         const subscription = await this.subscriptionRepo.findOne({ where: { id } });
         if (!subscription) {
           throw new NotFoundException('Subscription not found');
         }
         await this.subscriptionRepo.delete(id);
-        return 'Subscription has been deleted';
+        return {
+          message: 'Subscription has been deleted'
+        };
       }
 
-      async FindUsers(id: string){
+      async FindUsers(id: number){
         const subscription = await this.subscriptionRepo.findOne({ where: { id } });
         if (!subscription) {
           throw new NotFoundException('Subscription not found');
@@ -63,7 +65,7 @@ export class SubscriptionService {
         return await this.subscriptionRepo.findOne({where: {type:type}});
       }
 
-      async subscribe(subscriptionId: string, userId: string){
+      async subscribe(subscriptionId: number, userId: number){
 
         const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
         if(!user.payment_method){
