@@ -38,7 +38,10 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  //...Swagger
+  
+  //Uploads
+  // app.useStaticAssets('uploads', {prefix: '/uploads'}) 
+  
   
   await app.listen(3000);
 }

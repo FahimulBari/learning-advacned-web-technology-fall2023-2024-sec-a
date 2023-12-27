@@ -69,7 +69,9 @@ export class SubscriptionService {
 
         const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
         if(!user.payment_method){
-            return 'You have to add a payment method';
+            return {
+              message: 'You have to add a payment method'
+            };
         }
 
         user.subscription  = await this.subscriptionRepo.findOne({ where: { id:subscriptionId } });

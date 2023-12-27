@@ -52,7 +52,7 @@ export class SubscriptionController {
 
   @UseGuards(JwtUserAuthGuard)
   @Get('subscribe/:id')
-  welcomeUser(@Param('id') id:number,@Request() req){
+  Subscribe(@Param('id') id:number,@Request() req){
     return this.subscriptionService.subscribe(id,req.user.id);
   }
 

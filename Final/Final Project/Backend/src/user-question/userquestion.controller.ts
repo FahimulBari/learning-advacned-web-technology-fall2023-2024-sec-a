@@ -1,44 +1,46 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, UsePipes,ValidationPipe, UseGuards, Req, Session} from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, UsePipes,ValidationPipe, UseGuards, Req, Session, Request} from '@nestjs/common';
 import { UserquestionService } from './userquestion.service';
 import { CreateUserQuestionDto } from './dto/create-user-question.dto';
 import { UpdateUserQuestionDto } from './dto/update-user-question.dto';
+import { JwtUserAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @Controller('userquestion')
-//@UseGuards(AuthUserGuard)
+@UseGuards(JwtUserAuthGuard)
 export class UserquestionController {
   constructor(private readonly userquestionService: UserquestionService) {}
 
   @Post('create')
   @UsePipes(ValidationPipe)
-  create(@Body() createUserQuestionDto: CreateUserQuestionDto,@Session() session) {
-    const userId = session.userId; // Get user ID from the session
+  create(@Body() createUserQuestionDto: CreateUserQuestionDto,@Request() req) {
+    const userId = req.user.id; // Get user ID from the session
+    console.log(userId);
     return this.userquestionService.create(createUserQuestionDto,userId);
   }
 
   @Get('seeall')
-  findAll(@Session() session) {
-      const userId = session.userId;
+  findAll(@Request() req) {
+    const userId = req.user.id;
       return this.userquestionService.findAllByUser(userId);
   }
 
   @Get('find/:id')
-  findOne(@Param('id') id: number, @Session() session) {
-      const userId = session.userId;
+  findOne(@Param('id') id: number, @Request() req) {
+    const userId = req.user.id;
       return this.userquestionService.findOneByUser(id, userId);
   }
 
   @Get('count/totalquestions')
-  async countTotalQuestions(@Session() session) {
-      const userId = session.userId;
+  async countTotalQuestions(@Request() req) {
+      const userId = req.user.id;
       const totalQuestions = await this.userquestionService.countTotalQuestionsByUser(userId);
       return `The total questions you created are: ${totalQuestions}`;
   }
 
   @Put('update/:id')
 @UsePipes(ValidationPipe)
-update(@Param('id') id: number, @Body() updateUserQuestionDto: UpdateUserQuestionDto, @Session() session) {
-    const userId = session.userId;
+update(@Param('id') id: number, @Body() updateUserQuestionDto: UpdateUserQuestionDto, @Request() req) {
+    const userId = req.user.id;
     return this.userquestionService.update(id, updateUserQuestionDto, userId);
 }
 
