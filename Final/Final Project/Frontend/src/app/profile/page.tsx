@@ -29,6 +29,7 @@ export const AdminProfile = () => {
   return(
     <div>
       <Link href='/subscription/manage'>Subscription Manage</Link> <br />
+      <Link href='/search'>Search User</Link> <br />
       Email Is: {decodeURIComponent(user.email)} <br />
       Name Is: {user.username} <br />
       Role Is: {user.role}
