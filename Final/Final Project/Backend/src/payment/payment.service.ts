@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaymentMethod } from 'src/entities/payment.method.entity';
 import { Repository } from 'typeorm';
@@ -23,7 +23,9 @@ export class PaymentService {
             user.payment_method = method;
             await this.userRepo.update(userId,user); 
 
-            return 'Payment Method Added';
+            return {
+                message: 'Payment Method Added'
+            }
         }
 
         return 'Cannot Add Method!! Payment Method Already Added';
@@ -32,7 +34,21 @@ export class PaymentService {
     async UpdateMethod(paymentMethodDto: PaymentMethodDto,userId: number){
         const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
         await this.paymentRepo.update(user.payment_method.id ,paymentMethodDto); 
-        return "Payment Method Updated";
+        
+        return {
+            message: 'Payment Method Update'
+        }
     }
+
+    async GetMethodByUser(userId: number){
+
+        const user = await this.userRepo.findOne({where: {id: userId}, relations: ['payment_method']});
+        
+        if (!user) {
+          throw new NotFoundException('Payment Method not found');
+        }
+
+        return await this.paymentRepo.findOne({where: {id : user.payment_method.id}});  
+      }
 
 }

@@ -37,17 +37,11 @@ export class SubscriptionController {
     return this.subscriptionService.GetAll();
   }
 
-  @UseGuards(JwtUserAuthGuard)
+  @UseGuards(JwtAdminAuthGuard)
   @Delete('delete/:id')
   Delete(@Param('id') id:number)
   {
     return this.subscriptionService.delete(id);
-  }
-
-  @UseGuards(JwtAdminAuthGuard)
-  @Get('user/:id')
-  GetUsers(@Param('id') id:number){
-    return this.subscriptionService.FindUsers(id);
   }
 
   @UseGuards(JwtUserAuthGuard)
@@ -56,4 +50,9 @@ export class SubscriptionController {
     return this.subscriptionService.subscribe(id,req.user.id);
   }
 
+  @UseGuards(JwtAdminAuthGuard)
+  @Get('user/:id')
+  GetByUsers(@Param('id') id:number){
+    return this.subscriptionService.FindUsers(id);
+  }
 }

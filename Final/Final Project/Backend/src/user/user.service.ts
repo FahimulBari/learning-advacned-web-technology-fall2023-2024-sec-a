@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create.user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateAdminDto } from './dto/create.admin.dto';
 import { Subscription } from 'src/entities/subscription.entity';
 
@@ -20,31 +20,7 @@ export class UserService {
   if(user.role == null) user.role = 'user'; 
 
   //Subscription
-  if(user.type == null){ 
-   const subscription = await this.subscriptionRepo.findOne({
-      where: {type: 'free'}
-    })
-
-    user.type = subscription.type;
-    user.subscription = subscription;
-  }
-  else{
-    const subscription = await this.subscriptionRepo.findOne({
-      where: {type: user.type}
-    })
-    
-    if (!subscription) {
-      throw new NotFoundException('Subscription not found');
-    }
-
-    user.type = subscription.type;
-    user.subscription = subscription;
-  }
-
-  await this.userRepo.save(user);
-  return {
-    message: 'User Has Been Created'
-  }
+  return await this.AutoSubscription(user);
   }
 
   async findAll() {
@@ -59,4 +35,47 @@ export class UserService {
     return await this.userRepo.findOne({where: {email:email}})
   }
 
+  async AutoSubscription(user : User) {
+
+    try {
+  
+      let subscription;
+  
+      if(!user.type) {
+        subscription = await this.subscriptionRepo.findOne({ where: {type: ILike('%free%') }});
+      } else {
+        subscription = await this.subscriptionRepo.findOne({ where: {type: user.type }}); 
+      }
+  
+      if(!subscription) {
+        throw new NotFoundException('Subscription not found');
+      }
+  
+      // Rest of business logic
+      user.type = subscription.type;
+      user.subscription = subscription;
+
+       
+      await this.userRepo.save(user);
+      return {
+        message: 'User Has Been Created'
+      }
+  
+    } catch(error) {
+  
+      if(error instanceof NotFoundException) {
+        return {
+          message: error.message
+        };
+      } else {
+        return {
+          message: 'Subscription not found'
+        };
+      }
+  
+    }
+  
+  }
+
 }
+

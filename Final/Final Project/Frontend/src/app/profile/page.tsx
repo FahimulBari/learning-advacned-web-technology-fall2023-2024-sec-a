@@ -44,6 +44,7 @@ export const UserProfile = () => {
   return(
     <div>
       <Link href='/subscription/plans'>Subscription Plans</Link> <br />
+      <Link href='/payment'>Payment Method</Link> <br />
       Email Is: {decodeURIComponent(user.email)} <br />
       Name Is: {user.username} <br />
       Role Is: {user.role}

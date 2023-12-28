@@ -16,6 +16,6 @@ export class PaymentMethod{
     @Column({nullable: false})
     expdate: string;
 
-    @OneToOne(()=> User, user => user.payment_method)
+    @OneToOne(()=> User, user => user.payment_method , {onDelete: 'SET NULL'})
     user: User;
 }

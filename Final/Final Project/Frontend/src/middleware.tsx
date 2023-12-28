@@ -13,5 +13,10 @@ export default function middleware(request: NextRequest){
 }
 
 export const config = {
-    matcher: ['/system/:path*','/profile/:path*','/subscription/:path*'],
+    matcher: [
+        '/system/:path*',
+        '/profile/:path*',
+        '/subscription/:path*',
+        '/payment/:path*'
+    ],
 }

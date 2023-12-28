@@ -46,7 +46,7 @@ export class User{
     @Column({ default: 'active' })
     status: string;
 
-    @ManyToOne(()=> Subscription)
+    @ManyToOne(()=> Subscription, {onDelete: "SET NULL"})
     subscription: Subscription;
 
     @OneToOne(()=> PaymentMethod)

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Subscription(){
 
-    IfUser();
+    IfAdmin();
 
     return(
         <>

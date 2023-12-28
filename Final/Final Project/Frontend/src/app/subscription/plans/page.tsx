@@ -1,3 +1,4 @@
+import { GetCookieObject } from "@/components/Cookies/CookiesLocal";
 import SubscriptionPlans from "@/components/Subscription/SubscriptionPlans";
 import { Metadata } from "next";
 
@@ -7,9 +8,11 @@ export const metadata: Metadata = {
 }
 
 export default function Plans() {
+
+    const user: IUser = GetCookieObject('user');
     return(
         <>
-          <SubscriptionPlans/>
+          <SubscriptionPlans user={user}/>
         </>
     );
 }

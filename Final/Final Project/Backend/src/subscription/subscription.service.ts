@@ -16,7 +16,10 @@ export class SubscriptionService {
     async create(subscriptionDto: SubscriptionDto){
         const subscription = this.subscriptionRepo.create(subscriptionDto);
         await this.subscriptionRepo.save(subscription);
-        return 'New Subscription Added';
+
+        return {
+          message: 'New Subscription has been Added'
+        };
       }
       async update(id: number, subscriptionDto: SubscriptionDto){
         const subscription = await this.subscriptionRepo.findOne({where: {id:id}});
@@ -24,7 +27,10 @@ export class SubscriptionService {
             throw new NotFoundException('Subscription not found');
         }
         await this.subscriptionRepo.update(id,subscriptionDto);
-        return 'Subscription Has Been Updated';
+
+        return {
+          message: 'Subscription has been Updated'
+        };
     }
 
     async Get(id: number) {
@@ -46,6 +52,7 @@ export class SubscriptionService {
           throw new NotFoundException('Subscription not found');
         }
         await this.subscriptionRepo.delete(id);
+
         return {
           message: 'Subscription has been deleted'
         };
@@ -77,6 +84,9 @@ export class SubscriptionService {
         user.subscription  = await this.subscriptionRepo.findOne({ where: { id:subscriptionId } });
         user.type = user.subscription.type;
         await this.userRepo.update(userId,user);
-        return 'Subscription Successful';
+        
+        return {
+          message: 'Subscription Successful'
+        };
     }
 }

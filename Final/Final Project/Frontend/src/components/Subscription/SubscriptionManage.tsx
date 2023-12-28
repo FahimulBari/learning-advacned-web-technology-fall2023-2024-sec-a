@@ -21,8 +21,8 @@ export const SubscriptionManage = ()  => {
   useEffect(()=>{
 
     async function fetchData() {
-      const Respons = await GETToken('http://localhost:3000/subscription/all');
-      SetData(Respons);
+      const Response = await GETToken('http://localhost:3000/subscription/all');
+      SetData(Response);
     }
 
     fetchData();
@@ -48,7 +48,7 @@ export const SubscriptionManage = ()  => {
             <td>{Subscription.type}</td>
             <td>{Subscription.download_limit}</td>
             <td>{Subscription.price}</td>
-            <td><DeleteButton id={`${Subscription.id}`}/></td>
+            <td><DeleteButton id={`${Subscription.id}`} fetch={SetData}/></td>
             <td><UpdateButton id={`${Subscription.id}`}/></td>
             </tr>
            ))}
@@ -67,11 +67,19 @@ const UpdateButton = ({id}:{id: string}) => {
 }
 
 
-const DeleteButton = ({id}:{id: string}) => {
+const DeleteButton = ({id,fetch}:{id: string,fetch: any}) => {
 
+  // Delete a row
   const deleteSubscriptions = async (id: string) => {
     const Response = await DELETEToken(`http://localhost:3000/subscription/delete/${id}`);
     alert(Response.message);
+    await fetchData();
+  }
+
+  // Update the table after delete a row
+  async function fetchData() {
+    const Response = await GETToken('http://localhost:3000/subscription/all');
+    fetch(Response);
   }
 
   return(

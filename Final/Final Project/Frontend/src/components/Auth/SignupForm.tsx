@@ -24,7 +24,7 @@ export const SignupFormValidate = ()=> {
 
         const Response = await POST('http://localhost:3000/auth/signup',formData);
         if(Response.error){
-            alert(Response.error);
+            alert(Response.message);
         }
         else{
             alert(`${Response.message}.\nLet's Login!!`);
