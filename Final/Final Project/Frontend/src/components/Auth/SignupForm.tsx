@@ -33,40 +33,89 @@ export const SignupFormValidate = ()=> {
     }
 
     return(
-    <form method="post" onSubmit={handleSubmit(processForm)}>   
-        <label htmlFor="username">Username: </label>
-        <input id="username" className="rounded-lg" type="text" placeholder="Type Username" {...register('username')}/> 
-        {errors.username?.message && <p className='text-red-400 text-sm'>{errors.username.message}</p>}<br />
-
+        <form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md" method="post" onSubmit={handleSubmit(processForm)}>   
+        {/* Username */}
+        <div className="mb-4">
+            <label htmlFor="username" className="text-gray-600 block">Username:</label>
+            <input 
+                id="username" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="text" 
+                placeholder="Type Username" 
+                {...register('username')}
+            /> 
+            {errors.username?.message && <p className='text-red-500 text-sm mt-1'>{errors.username.message}</p>}
+        </div>
+    
         {/* Email */}
-        <label htmlFor="user-email">Email: </label>
-        <input id="user-email" className="rounded-lg" type="email" placeholder="Type Email" {...register('email')}/> 
-        {errors.email?.message && <p className='text-red-400 text-sm'>{errors.email.message}</p>}<br />
-        
+        <div className="mb-4">
+            <label htmlFor="user-email" className="text-gray-600 block">Email:</label>
+            <input 
+                id="user-email" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="email" 
+                placeholder="Type Email" 
+                {...register('email')}
+            /> 
+            {errors.email?.message && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
+        </div>
+    
         {/* Phone Number */}
-        <label htmlFor="number">Phone Number: </label>
-        <input id="number" className="rounded-lg" type="number" placeholder="Type Phone Number" {...register('phonenumber')}/> 
-        {errors.phonenumber?.message && <p className='text-red-400 text-sm'>{errors.phonenumber.message}</p>}<br />
-
+        <div className="mb-4">
+            <label htmlFor="number" className="text-gray-600 block">Phone Number:</label>
+            <input 
+                id="number" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="number" 
+                placeholder="Type Phone Number" 
+                {...register('phonenumber')}
+            /> 
+            {errors.phonenumber?.message && <p className='text-red-500 text-sm mt-1'>{errors.phonenumber.message}</p>}
+        </div>
+    
         {/* Gender */}
-        <input id="male" className="rounded-lg" type="radio" value="male" {...register('gender')}/> 
-        <label htmlFor="gender">Male </label>
-        <input id="female" className="rounded-lg" type="radio" value="female" {...register('gender')}/> 
-        <label htmlFor="gender">Female </label>
-        {errors.gender?.message && <p className='text-red-400 text-sm'>{errors.gender.message}</p>}<br />
-
+        <div className="mb-4">
+            <label className="text-gray-600 block">Gender:</label>
+            <div className="flex items-center">
+                <input id="male" className="mr-2" type="radio" value="male" {...register('gender')}/> 
+                <label htmlFor="male">Male</label>
+                <input id="female" className="ml-4 mr-2" type="radio" value="female" {...register('gender')}/> 
+                <label htmlFor="female">Female</label>
+            </div>
+            {errors.gender?.message && <p className='text-red-500 text-sm mt-1'>{errors.gender.message}</p>}
+        </div>
+    
         {/* Password */}
-        <label htmlFor="password">Password: </label>
-        <input id="password" className="rounded-lg" type="password" placeholder="Type Password" {...register('password')}/>
-        {errors.password?.message && <p className="text-sm text-red-400">{errors.password.message}</p>}<br />
-        
+        <div className="mb-4">
+            <label htmlFor="password" className="text-gray-600 block">Password:</label>
+            <input 
+                id="password" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="password" 
+                placeholder="Type Password" 
+                {...register('password')}
+            />
+            {errors.password?.message && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+        </div>
+    
         {/* Confirm Password */}
-        <label htmlFor="cpassword">Confirm Password: </label>
-        <input id="cpassword" className="rounded-lg" type="password" placeholder="Confirm Password" {...register('confirmpassword')}/>
-        {errors.confirmpassword?.message && <p className="text-sm text-red-400">{errors.confirmpassword.message}</p>}<br />
-
-        <button className="bg-orange-300 rounded-lg py-1 px-2" type="submit">Submit</button>
+        <div className="mb-6">
+            <label htmlFor="cpassword" className="text-gray-600 block">Confirm Password:</label>
+            <input 
+                id="cpassword" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="password" 
+                placeholder="Confirm Password" 
+                {...register('confirmpassword')}
+            />
+            {errors.confirmpassword?.message && <p className="text-red-500 text-sm mt-1">{errors.confirmpassword.message}</p>}
+        </div>
+    
+        <button className="w-full bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange" type="submit">
+            Submit
+        </button>
     </form>
+    
     );
 }
 

@@ -35,17 +35,36 @@ export const LoginFormValidate = ()=> {
     }
 
     return(
-    <form method="post" onSubmit={handleSubmit(processForm)}>   
-        <label htmlFor="user-email">Email: </label>
-        <input id="user-email" className="rounded-lg" type="email" placeholder="Type Email" {...register('username')}/> 
-        {errors.username?.message && <p className='text-red-400 text-sm'>{errors.username.message}</p>}<br />
+<form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md" method="post" onSubmit={handleSubmit(processForm)}>   
+    <div className="mb-4">
+        <label htmlFor="user-email" className="text-gray-600 block">Email:</label>
+        <input 
+            id="user-email" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+            type="email" 
+            placeholder="Type Email" 
+            {...register('username')}
+        /> 
+        {errors.username?.message && <p className='text-red-500 text-sm mt-1'>{errors.username.message}</p>}
+    </div>
 
-        <label htmlFor="user-password">Password: </label>
-        <input id="user-password" className="rounded-lg" type="password" placeholder="Type Password" {...register('password')}/>
-        {errors.password?.message && <p className="text-sm text-red-400">{errors.password.message}</p>}<br />
-        
-        <button className="bg-orange-300 rounded-lg py-1 px-2" type="submit">Submit</button>
-    </form>
+    <div className="mb-4">
+        <label htmlFor="user-password" className="text-gray-600 block">Password:</label>
+        <input 
+            id="user-password" 
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+            type="password" 
+            placeholder="Type Password" 
+            {...register('password')}
+        />
+        {errors.password?.message && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+    </div>
+    
+    <button className="w-full bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange" type="submit">
+        Submit
+    </button>
+</form>
+
     );
 }
 

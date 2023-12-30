@@ -17,6 +17,8 @@ export const config = {
         '/system/:path*',
         '/profile/:path*',
         '/subscription/:path*',
-        '/payment/:path*'
+        '/payment/:path*',
+        '/search/:path*',
+        '/template/:path*'
     ],
 }

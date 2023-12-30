@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { GoThere } from '@/components/Route/GoThere'
+import { BotPress } from '@/components/Bot/botpress'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <GoThere path='/profile' btnName='Profile'/><br />
         {children}
+        <BotPress/>
       </body>
     </html>
   )

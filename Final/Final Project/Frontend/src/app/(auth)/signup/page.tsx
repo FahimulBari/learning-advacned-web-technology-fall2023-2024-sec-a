@@ -8,9 +8,11 @@ export const metadata = {
 
 export default function Login(){
     return(
-        <div>
-            <h1>Signup Form</h1>
+
+        <div className="max-w-md mx-auto p-6 bg-white3 mb-8">
+        <h1 className="text-3xl font-bold text-blue-500 mb-4">Signup Form</h1>
             <SignupFormValidate/>
-        </div>
+        </div>   
+
     );
 }
