@@ -1,3 +1,4 @@
+'use server'
 import { GetCookie } from "../Cookies/CookiesLocal";
 
 export const GET = async (url: string) => {

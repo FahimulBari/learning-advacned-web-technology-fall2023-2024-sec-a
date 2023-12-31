@@ -111,7 +111,7 @@ export const SignupFormValidate = ()=> {
             {errors.confirmpassword?.message && <p className="text-red-500 text-sm mt-1">{errors.confirmpassword.message}</p>}
         </div>
     
-        <button className="w-full bg-orange-500 text-white rounded-lg py-2 px-4 hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange" type="submit">
+        <button className="w-full bg-sky-400 text-white rounded-lg py-2 px-4 hover:bg-orange-400 focus:outline-none focus:shadow-outline-orange" type="submit">
             Submit
         </button>
     </form>

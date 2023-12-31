@@ -12,7 +12,10 @@ export class TemplateService {
     async create(createTemplateDto: CreateTemplateDto){
         const template = this.templateRepo.create(createTemplateDto);  
         await this.templateRepo.save(template);
-        return 'Template Has Been Created';
+
+        return {
+          message: 'New Template has been Added'
+        };
     }
 
     async update(id: number, createTemplateDto: CreateTemplateDto){
@@ -21,7 +24,10 @@ export class TemplateService {
             throw new NotFoundException('Template not found');
         }
         await this.templateRepo.update(id,createTemplateDto);
-        return 'Template Has Been Updated';
+
+        return {
+          message: 'Template has been Updated'
+        };
     }
 
     async delete(id: number) {
@@ -30,7 +36,10 @@ export class TemplateService {
           throw new NotFoundException('Template not found');
         }
         await this.templateRepo.delete(id);
-        return 'Template has been deleted';
+
+        return {
+          message: 'Template has been deleted'
+        };
       }
     
       async get(id: number) {

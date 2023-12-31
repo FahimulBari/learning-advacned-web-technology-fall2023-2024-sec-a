@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { DeleteCookie } from "../Cookies/CookiesLocal";
 
-export const Logout = () => {
+export const LogoutComponent = () => {
 
     const router = useRouter();
     const DeleteProcess = async () => {
@@ -13,9 +13,7 @@ export const Logout = () => {
 
     return(
         <div>
-            <button className="bg-red-500 rounded-xl py-1 px-2" onClick={()=>DeleteProcess()}>Logout</button>
+            <button className="bg-red-900 text-sky-50 font-bold rounded-md py-1 px-2" onClick={()=>DeleteProcess()}>Logout</button>
         </div>
     );
 }
-
-export default Logout; 

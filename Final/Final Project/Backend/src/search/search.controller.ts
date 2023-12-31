@@ -26,6 +26,12 @@ export class SearchController {
     return this.searchService.GetUsersByNameSegment(segment);
   }
 
+  @Get('user')
+  GetAllUsers(){
+    return this.searchService.GetAllUsers();
+  }
+
+
   @UseGuards(JwtUserAuthGuard)
   @Get('template/type=:type')
   GetTemplateByType(@Param('type') type:string){
@@ -37,4 +43,10 @@ export class SearchController {
   GetTemplateByNameSegment(@Param('segment') segment:string){
     return this.searchService.GetTemplatesByNameSegment(segment);
   }
+
+  @Get('template')
+  GetAllTemplates(){
+    return this.searchService.GetAllTemplates();
+  }
+
 }

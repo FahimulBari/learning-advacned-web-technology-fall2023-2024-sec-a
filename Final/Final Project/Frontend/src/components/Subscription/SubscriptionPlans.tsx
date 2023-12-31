@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { GET, GETToken } from "../ApiCalls/GETMethod";
 import { GetCookieObject, SetCookieObject } from "../Cookies/CookiesLocal";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 interface SubscriptionEntity {
     id: string;
@@ -30,31 +31,22 @@ export const SubscriptionPlans = ({user}: {user : IUser})  => {
   },[])
 
     return(
-        <div>
-            <table>
-         <thead>
-           <tr>
-             <th>Type</th>
-             <th>Download Limit</th>
-             <th>Price</th>
-             <th>Subscribe</th>
-           </tr>
-         </thead>
-  
-         <tbody>
-         {Datas.map((Subscription: SubscriptionEntity) => (
-            <tr key={Subscription.id}> 
-            <td>{Subscription.type}</td>
-            <td>{Subscription.download_limit}</td>
-            <td>{Subscription.price}</td>
-            <td><Subscribe user={user} Subscription={Subscription}/></td>
-            </tr>
-           ))}
-         </tbody>
-       </table>
-        </div>
+    <div className="flex flex-wrap justify-center py-4">
+      {Datas.map((Subscription: SubscriptionEntity, index) => (
+              <React.Fragment key={Subscription.id}>
+                <div className="w-80 bg-white p-8 rounded-md shadow-md mx-4 my-4">
+                  <h2 className="text-xl font-bold mb-4 text-center">{Subscription.type.toUpperCase()}</h2>
+                  <p className="text-3xl font-semibold text-center text-gray-600 mb-4">{Subscription.price}$</p>
+                  <Subscribe user={user} Subscription={Subscription}/>
+                </div>
+                {(index + 1) % 3 === 0 && <div className="w-full my-4" key={`breaker-${index}`} />}
+              </React.Fragment>
+            ))}
+    </div>
     );
 }
+
+{/* <Subscribe user={user} Subscription={Subscription}/> */}
 
 export const Subscribe = ({user,Subscription}:{Subscription: SubscriptionEntity,user: IUser}) => {
 
@@ -72,13 +64,13 @@ export const Subscribe = ({user,Subscription}:{Subscription: SubscriptionEntity,
 
   if(user.type === Subscription.type){
     return(
-      <div>Active</div>
+      <div className="bg-black text-green-400 text-center py-2 px-4 rounded-md w-full">Active</div>
     );
   }
   else{
   return(
     <div>
-      <button onClick={async ()=>await processSubscription(Subscription.id)}>Subscribe</button>
+      <button className="bg-black text-white py-2 px-4 rounded-md hover:bg-green-500 focus:outline-none focus:shadow-outline-blue w-full" onClick={async ()=>await processSubscription(Subscription.id)}>Subscribe</button>
     </div>
   );
   }

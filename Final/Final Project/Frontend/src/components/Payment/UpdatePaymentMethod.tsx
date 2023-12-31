@@ -30,20 +30,52 @@ export const UpdatePaymentMethod = () => {
     }
 
     return(
-    <form method="post" onSubmit={handleSubmit(processForm)}>   
-        <label htmlFor="cardno">Card No: </label>
-        <input id="cardno" className="rounded-lg" type="text" placeholder="Type Card No" {...register('cardno')}/> 
-        {errors.cardno?.message && <p className='text-red-400 text-sm'>{errors.cardno.message}</p>}<br />
+    <div className="max-w-md mx-auto p-6 bg-white3 mb-8">
+    <h1 className="text-3xl font-bold text-black mb-4">Update Payment</h1>
+    <form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md" method="post" onSubmit={handleSubmit(processForm)}>   
+        <div className="mb-4">
+            <label htmlFor="cardno" className="text-gray-600 block">Card No:</label>
+            <input 
+                id="cardno" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="text" 
+                placeholder="Type Card No" 
+                {...register('cardno')}
+            /> 
+            {errors.cardno?.message && <p className='text-red-500 text-sm mt-1'>{errors.cardno.message}</p>}
+        </div>
 
-        <label htmlFor="cvc">CVC: </label>
-        <input id="cvc" className="rounded-lg" type="text" placeholder="Type CVC" {...register('cvc')}/>
-        {errors.cvc?.message && <p className="text-sm text-red-400">{errors.cvc.message}</p>}<br />
+        <div className="mb-4">
+            <label htmlFor="cvc" className="text-gray-600 block">CVC:</label>
+            <input 
+                id="cvc" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="text" 
+                placeholder="Type CVC" 
+                {...register('cvc')}
+            />
+            {errors.cvc?.message && <p className="text-red-500 text-sm mt-1">{errors.cvc.message}</p>}
+        </div>
         
-        <label htmlFor="expdate">Expire Date: </label>
-        <input id="expdate" className="rounded-lg" type="text" placeholder="Exp Date" {...register('expdate')}/> 
-        {errors.expdate?.message && <p className='text-red-400 text-sm'>{errors.expdate.message}</p>}<br />
+        <div className="mb-4">
+            <label htmlFor="expdate" className="text-gray-600 block">Expire Date:</label>
+            <input 
+                id="expdate" 
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" 
+                type="text" 
+                placeholder="Exp Date" 
+                {...register('expdate')}
+            /> 
+            {errors.expdate?.message && <p className='text-red-500 text-sm mt-1'>{errors.expdate.message}</p>}
+        </div>
 
-        <button className="bg-orange-300 rounded-lg py-1 px-2" type="submit">Submit</button>
+        <button 
+            className="w-full bg-orange-300 text-white rounded-lg py-2 px-4 hover:bg-orange-400 focus:outline-none focus:shadow-outline-orange" 
+            type="submit"
+        >
+        Submit
+        </button>
     </form>
+    </div>
     );
 }

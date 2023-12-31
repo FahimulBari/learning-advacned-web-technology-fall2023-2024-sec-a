@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GoThere path='/profile' btnName='Profile'/><br />
+        {/* <GoThere path='/profile' btnName='Profile'/><br /> */}
         {children}
         <BotPress/>
       </body>

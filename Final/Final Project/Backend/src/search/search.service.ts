@@ -25,6 +25,10 @@ export class SearchService {
         });
     }
 
+    async GetAllUsers(){
+        return await this.userRepo.find();
+    }
+
     async GetTemplateByType(type: string){
         return await this.templateRepo.find({where: {type: type}});
     }
@@ -34,4 +38,9 @@ export class SearchService {
           where: { name: Like(`%${segment}%`) },
         });
     }
+
+    async GetAllTemplates(){
+        return await this.templateRepo.find();
+    }
+
 }
